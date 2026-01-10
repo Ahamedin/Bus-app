@@ -1,0 +1,64 @@
+.highway-section {
+  height: 100vh;
+  background: linear-gradient(#87ceeb, #cce7ff);
+  overflow: hidden;
+}
+
+/* container to split left & right */
+.highway-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+}
+
+/* LEFT SIDE: Vertical Road */
+.vertical-road {
+  position: relative;
+  width: 140px;
+  height: 300%;
+  margin-left: 80px;
+  background: #2f2f2f;
+  animation: moveRoadVertical 6s linear infinite;
+}
+
+/* center dashed line */
+.vertical-road::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    #fff,
+    #fff 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateX(-50%);
+}
+
+/* RIGHT SIDE: Text */
+.hero-text-vertical {
+  margin-left: 120px;
+  margin-top: 20%;
+  max-width: 400px;
+  color: #0f172a;
+}
+
+.hero-text-vertical h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* Animation */
+@keyframes moveRoadVertical {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0); 
+  }
+}
+

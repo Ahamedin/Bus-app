@@ -1,0 +1,36 @@
+.admin-container {
+  padding: 40px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.admin-container h1 {
+  margin-bottom: 5px;
+}
+
+.admin-container p {
+  margin-bottom: 20px;
+  color: #475569;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 15px;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #1e293b;
+  color: white;
+}
+
+.admin-table tr:nth-child(even) {
+  background: #f1f5f9;
+}
