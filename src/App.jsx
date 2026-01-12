@@ -1,19 +1,62 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
+
+import Navbar from "./components/Navbar";
+
+// Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
-import Navbar from "./components/Navbar";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+
 
 function App() {
   return (
     <Router>
       <Navbar />
+
       <Routes>
+        {/* PUBLIC ROUTES */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/admin" element={<Admin />} />
+
+        {/* AUTH ROUTES */}
+     <Route path="/sign-in" element={<SignInPage />} />
+
+
+        <Route path="/sign-up" element={<SignUpPage />} />
+
+
+        {/* PROTECTED ROUTES */}
+        <Route
+          path="/profile"
+          element={
+            <SignedIn>
+              <Profile />
+            </SignedIn>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <>
+              <SignedIn>
+                <Admin />
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

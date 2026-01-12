@@ -11,13 +11,30 @@
   margin: 0;
 }
 
+/* IMPORTANT FIX */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Style normal links */
 .nav-links a {
   color: white;
   text-decoration: none;
-  margin-left: 20px;
   font-weight: 500;
 }
 
 .nav-links a:hover {
   text-decoration: underline;
+}
+
+/* Clerk UserButton alignment fix */
+.nav-links .cl-userButtonBox,
+.nav-links .cl-userButtonTrigger {
+  display: flex;
+  align-items: center;
+}
+.cl-userButtonTrigger {
+  transform: scale(0.95);
 }
