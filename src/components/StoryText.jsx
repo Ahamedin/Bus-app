@@ -1,52 +1,38 @@
-import VerticalRoad from "./VerticalRoad";
+import { useEffect, useRef } from "react";
 
 const StoryText = () => {
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          textRef.current.classList.add("show");
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(textRef.current);
+  }, []);
+
   return (
-    <section
-      style={{
-        position: "relative",
-        height: "100vh",
-        background: "#f5f5f5",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          height: "100%",
-          alignItems: "center",
-        }}
-      >
-        {/* LEFT: Road */}
-        <div
-          style={{
-            width: "220px",
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <VerticalRoad />
+    <section className="story-section">
+      <div className="highway-container">
+
+        {/* Road wrapper for mobile layout */}
+        <div className="road-wrapper">
+          <div className="vertical-road"></div>
         </div>
 
-        {/* RIGHT: Text */}
-        <div
-          style={{
-            flex: 1,
-            padding: "80px",
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
-          <h2>The Journey Begins...</h2>
+        <div ref={textRef} className="hero-text-vertical">
+          <h1>Campus Moments on Every Ride</h1>
           <p>
-            Every evening, students board the bus from college, traveling safely
-            towards their homes.
-          </p>
-          <p>
-            Our system ensures students never miss their stop.
+            From study chats to fun debates,  
+            the bus ride keeps the campus spirit alive.  
+            Travel together, grow together.
           </p>
         </div>
+
       </div>
     </section>
   );

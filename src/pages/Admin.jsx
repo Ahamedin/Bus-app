@@ -1,7 +1,7 @@
+import "../components/Highway.css";
 import "./Admin.css";
 
 const Admin = () => {
-  // 🔹 Mock data (simulating DB)
   const students = [
     {
       id: 1,
@@ -27,31 +27,42 @@ const Admin = () => {
   ];
 
   return (
-    <div className="admin-container">
-      <h1>Admin Dashboard</h1>
-      <p>Student Bus Details</p>
+    <section className="about-section">
+      <div className="admin-container">
 
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Seat No</th>
-            <th>Destination</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map((student) => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.seatNo}</td>
-              <td>{student.destination}</td>
-              <td>{student.phone}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        {/* Page Heading */}
+        <div className="hero-text-vertical show admin-heading">
+          <h1>Admin Dashboard</h1>
+          <p>College Bus Student Details</p>
+        </div>
+
+        {/* Table */}
+        <div className="admin-table-wrapper">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Seat No</th>
+                <th>Destination</th>
+                <th>Phone Number</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {students.map((student) => (
+                <tr key={student.id}>
+                  <td>{student.name}</td>
+                  <td>{student.seatNo}</td>
+                  <td>{student.destination}</td>
+                  <td>{student.phone}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
   );
 };
 

@@ -1,0 +1,62 @@
+.map-controls {
+  padding: 15px 20px;
+  background: #005f56;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.map-controls h2 {
+  font-family: "CollegeHeading", sans-serif;
+  font-size: 1.5rem;
+  flex-basis: 100%;
+}
+
+.map-controls input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  width: 220px;
+  font-family: "CollegeParagraph", sans-serif;
+}
+
+.map-controls button {
+  padding: 8px 16px;
+  background: #ffffff;
+  color: #005f56;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.map-controls button:hover {
+  background: #e2e8f0;
+}
+
+.hint {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  flex-basis: 100%;
+}
+
+.error {
+  color: #ffb4b4;
+  font-size: 0.9rem;
+  flex-basis: 100%;
+}
+
+/* 📱 Mobile */
+@media (max-width: 480px) {
+  .map-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .map-controls input,
+  .map-controls button {
+    width: 100%;
+  }
+}

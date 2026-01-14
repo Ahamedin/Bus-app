@@ -1,27 +1,81 @@
-.highway-section {
-  height: 100vh;
-  background: linear-gradient(#87ceeb, #cce7ff);
-  overflow: hidden;
+/* ===============================
+   FONT IMPORT
+================================ */
+
+@font-face {
+  font-family: "CollegeHeading";
+  src: url("../fonts/CollegiateBlackFLF.ttf") format("truetype");
 }
 
-/* container to split left & right */
+@font-face {
+  font-family: "CollegeParagraph";
+  src: url("../fonts/OpenSans_Condensed-Light.ttf") format("truetype");
+}
+
+/* ===============================
+   GLOBAL SECTION SPACING
+================================ */
+
+.highway-section {
+  padding-top: 70px; /* Navbar height */
+}
+
+.story-section,
+.destination-section,
+.about-section {
+  padding-top: 0; /* Navbar height */
+}
+
+/* ===============================
+   GLOBAL BACKGROUND
+================================ */
+
+.highway-section,
+.story-section,
+.destination-section {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #005f56);
+}
+
+.about-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #005f56);
+  padding-bottom: 80px;
+}
+
+/* ===============================
+   COMMON LAYOUT
+================================ */
+
 .highway-container {
   position: relative;
   height: 100%;
   display: flex;
+  align-items: center;
 }
 
-/* LEFT SIDE: Vertical Road */
-.vertical-road {
+/* Road wrapper */
+.road-wrapper {
+  width: 220px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   position: relative;
-  width: 140px;
-  height: 300%;
-  margin-left: 80px;
-  background: #2f2f2f;
-  animation: moveRoadVertical 6s linear infinite;
+  z-index: 5;
 }
 
-/* center dashed line */
+/* Road */
+.vertical-road {
+  width: 120px;
+  height: 300%;
+  background: #2f2f2f;
+  position: relative;
+  animation: moveRoadVertical 6s linear infinite;
+  flex-shrink: 0;
+}
+
 .vertical-road::before {
   content: "";
   position: absolute;
@@ -31,34 +85,222 @@
   height: 100%;
   background: repeating-linear-gradient(
     to bottom,
-    #fff,
-    #fff 20px,
+    #ffffff,
+    #ffffff 20px,
     transparent 20px,
     transparent 40px
   );
   transform: translateX(-50%);
 }
 
-/* RIGHT SIDE: Text */
+@keyframes moveRoadVertical {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
+}
+
+/* ===============================
+   TEXT STYLE
+================================ */
+
 .hero-text-vertical {
   margin-left: 120px;
-  margin-top: 20%;
-  max-width: 400px;
-  color: #0f172a;
+  max-width: 850px;
+  padding-right: 40px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.hero-text-vertical.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-text-vertical h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-family: "CollegeHeading", sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.1;
 }
 
-/* Animation */
-@keyframes moveRoadVertical {
-  from {
-    transform: translateY(-50%);
+.hero-text-vertical p {
+  font-family: "CollegeParagraph", sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  line-height: 1.4;
+  color: #ffffff;
+  margin-top: 12px;
+  max-width: 750px;
+}
+
+/* ===============================
+   STORY + DESTINATION LEFT SHIFT
+================================ */
+
+.story-section .hero-text-vertical,
+.destination-section .hero-text-vertical {
+  margin-left: 90px;
+}
+
+/* ===============================
+   BUS ANIMATION
+================================ */
+
+.bus-topview {
+  position: absolute;
+  left: 27px;
+  top: 150px;
+  width: 190px;
+  z-index: 20;
+  transform: rotate(180deg);
+  animation: busJourney 18s linear infinite;
+}
+
+@keyframes busJourney {
+  0%   { transform: translateY(-120px) rotate(180deg); opacity: 1; }
+  33%  { transform: translateY(100vh) rotate(180deg); opacity: 1; }
+  66%  { transform: translateY(200vh) rotate(180deg); opacity: 1; }
+  90%  { transform: translateY(280vh) rotate(180deg); opacity: 0; }
+  100% { transform: translateY(300vh) rotate(180deg); opacity: 0; }
+}
+
+/* ===============================
+   ABOUT PAGE WRAPPER
+================================ */
+
+.hero-text-vertical-wrapper {
+  margin-left: 120px;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
+
+/* Tablets */
+@media (max-width: 768px) {
+
+  .road-wrapper { 
+    width: 160px;
+    display: flex;
+    justify-content: flex-start;
   }
-  to {
-    transform: translateY(0); 
+  .vertical-road { 
+    width: 90px;
+    height: 250%;
+  }
+
+  .hero-text-vertical {
+    margin-left: 80px;
+    padding-right: 20px;
+  }
+
+  .hero-text-vertical-wrapper {
+    margin-left: 80px;
+  }
+
+  .bus-topview {
+    left: 18px;
+    width: 150px;
   }
 }
+
+/* ===============================
+   MOBILE ALIGNMENT
+================================ */
+
+@media (max-width: 480px) {
+
+  .home-container {
+    position: relative;
+  }
+
+  .highway-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100%;
+  }
+
+  /* Road fixed to left */
+  .road-wrapper {
+    width: 105px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 5;
+  }
+
+  .vertical-road {
+    width: 80px;
+    height: 300%;
+    background: #2f2f2f;
+    position: relative;
+    animation: moveRoadVertical 6s linear infinite;
+  }
+
+  /* Text beside road */
+  .hero-text-vertical {
+    margin-left: 15px;
+    margin-top: 30px;
+    max-width: calc(100vw - 90px);
+    text-align: left;
+    padding-right: 20px;
+  }
+
+  .hero-text-vertical h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .hero-text-vertical p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  /* Keep story & destination left aligned */
+  .story-section .hero-text-vertical,
+  .destination-section .hero-text-vertical {
+    margin-left: 15px;
+  }
+
+  .bus-topview {
+    left: -10px;
+    width: 130px;
+    top: 120px;
+  }
+  /* Center text only in About page */
+.about-section .hero-text-vertical h1,
+.about-section .hero-text-vertical p {
+  
+  text-align: center;
+}
+
+  
+.about-section .hero-text-vertical-wrapper{
+  margin-left: 0;
+  margin-right: 0;
+  align-items: center;
+  padding: 0 20px;
+}
+.about-section .hero-text-vertical {
+  margin-left: 0 !important;     /* remove text block left margin */
+  padding-right: 0;
+  max-width: 90%;
+}
+
+}
+
+/* Ultra small phones */
+@media (max-width: 360px) {
+  .vertical-road { width: 60px; }
+  .hero-text-vertical h1 { font-size: 2rem; }
+  .hero-text-vertical p { font-size: 0.95rem; }
+}
+
 

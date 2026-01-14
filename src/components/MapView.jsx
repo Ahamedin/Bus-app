@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./MapView.css";
 import {
   GoogleMap,
   LoadScript,
@@ -10,59 +11,80 @@ const containerStyle = {
   height: "100vh",
 };
 
-// 🔵 College location (example – change later)
-const COLLEGE_LOCATION = {
-  lat: 12.9716, // example
-  lng: 77.5946, // example
+/* 📍 Kalasalingam University Location */
+const DEFAULT_UNIVERSITY = {
+  lat: 9.575163364325412,
+  lng: 77.68070518973906,
 };
 
 const MapView = () => {
+  const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [directions, setDirections] = useState(null);
+  const [error, setError] = useState("");
 
   const calculateRoute = async () => {
-    if (!destination) return;
+    if (!destination) {
+      setError("Please enter destination");
+      return;
+    }
+
+    setError("");
 
     const directionsService = new window.google.maps.DirectionsService();
 
-    const result = await directionsService.route({
-      origin: COLLEGE_LOCATION,
-      destination: destination,
-      travelMode: window.google.maps.TravelMode.DRIVING,
-    });
+    try {
+      const result = await directionsService.route({
+        origin: source || DEFAULT_UNIVERSITY,
+        destination: destination,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      });
 
-    setDirections(result);
+      setDirections(result);
+    } catch {
+      setError("Route not found. Try a valid destination.");
+    }
   };
 
   return (
-    <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-      <div style={{ padding: "20px", background: "#eef" }}>
+    <LoadScript googleMapsApiKey="AIzaSyDiueVafmMYqloszSSngL3KN2EnAbRckIM">
+      
+      {/* Top Control Panel */}
+      <div className="map-controls">
         <h2>Bus Route Tracking</h2>
 
         <input
           type="text"
-          placeholder="Enter destination address"
-          value={destination}
-          onChange={(e) => setDestination(e.target.value)}
-          style={{
-            padding: "10px",
-            width: "300px",
-            marginRight: "10px",
-          }}
+          placeholder="Enter source (optional)"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
         />
 
-        <button onClick={calculateRoute} style={{ padding: "10px 20px" }}>
-          Show Route
-        </button>
+        <input
+          type="text"
+          placeholder="Enter destination"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+        />
+
+        <button onClick={calculateRoute}>Show Route</button>
+
+        <p className="hint">
+          If source is empty → Kalasalingam University is used.
+        </p>
+
+        {error && <p className="error">{error}</p>}
       </div>
 
+      {/* Map */}
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={COLLEGE_LOCATION}
+        center={DEFAULT_UNIVERSITY}
         zoom={12}
       >
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
+
     </LoadScript>
   );
 };

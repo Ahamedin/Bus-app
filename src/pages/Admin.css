@@ -1,36 +1,114 @@
+/* ===============================
+   ADMIN PAGE CONTAINER
+================================ */
+
 .admin-container {
-  padding: 40px;
-  background: #f8fafc;
+  padding: 80px 100px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #005f56);
 }
 
+/* Title styling same as site */
 .admin-container h1 {
-  margin-bottom: 5px;
+  font-family: "CollegeHeading", sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: #ffffff;
+  margin-bottom: 10px;
 }
 
 .admin-container p {
-  margin-bottom: 20px;
-  color: #475569;
+  font-family: "CollegeParagraph", sans-serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  color: #ffffff;
+  opacity: 0.9;
 }
+
+/* ===============================
+   TABLE WRAPPER
+================================ */
+
+.admin-table-wrapper {
+  margin-top: 40px;
+  overflow-x: auto; /* enables horizontal scroll on small devices */
+}
+
+/* ===============================
+   TABLE STYLE
+================================ */
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 600px; /* prevents table squish */
 }
 
+/* Table text */
 .admin-table th,
 .admin-table td {
-  padding: 12px 15px;
-  border: 1px solid #e2e8f0;
+  padding: 14px 18px;
   text-align: left;
+  font-family: "CollegeParagraph", sans-serif;
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
+/* Table heading */
 .admin-table th {
-  background: #1e293b;
-  color: white;
+  font-family: "CollegeHeading", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  background: rgba(0, 0, 0, 0.35);
 }
 
-.admin-table tr:nth-child(even) {
-  background: #f1f5f9;
+/* Row borders */
+.admin-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Hover effect */
+.admin-table tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===============================
+   RESPONSIVE FIXES
+================================ */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .admin-container {
+    padding: 60px 40px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .admin-container {
+    padding: 50px 20px;
+  }
+
+  .admin-table {
+    min-width: 520px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .admin-container h1 {
+    font-size: 2rem;
+  }
+
+  .admin-table {
+    min-width: 480px;
+  }
 }

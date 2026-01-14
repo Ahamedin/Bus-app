@@ -1,0 +1,68 @@
+.home-container {
+  position: relative;
+  width: 100%;
+}
+
+/* ===== BUS CONTINUOUS ANIMATION ===== */
+
+.bus-continuous {
+  position: fixed;
+  top: 0;
+
+  /* Responsive horizontal position */
+  left: clamp(16px, 5vw, 60px);
+
+  /* Responsive bus size */
+  width: clamp(120px, 18vw, 200px);
+
+  z-index: 10;
+
+  transform: rotate(180deg);
+
+  animation: busContinuousMotion 20s linear infinite;
+  animation-delay: -10s;
+
+  pointer-events: none;
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+
+@keyframes busContinuousMotion {
+  0% {
+    transform: translateY(calc(100vh - 120px)) rotate(180deg);
+    opacity: 0;
+  }
+
+  5% {
+    transform: translateY(calc(100vh - 120px)) rotate(180deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translateY(calc(400vh - 120px)) rotate(180deg);
+    opacity: 1;
+  }
+
+  81% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(calc(100vh - 120px)) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .bus-continuous {
+    left: 12px;
+    width: 110px;
+  }
+}
+
+@media (max-width: 400px) {
+  .bus-continuous {
+    left: 8px;
+    width: 95px;
+  }
+}
