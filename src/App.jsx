@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
 
 
 function App() {
@@ -29,9 +30,12 @@ function App() {
 
         {/* AUTH ROUTES */}
      <Route path="/sign-in" element={<SignInPage />} />
+       <Route path="/details" element={<UserDetailsPage />} />
+
 
 
         <Route path="/sign-up" element={<SignUpPage />} />
+
 
 
         {/* PROTECTED ROUTES */}

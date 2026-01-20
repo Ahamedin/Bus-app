@@ -1,36 +1,22 @@
+import { useEffect, useState } from "react";
 import "../components/Highway.css";
 import "./Admin.css";
 
 const Admin = () => {
-  const students = [
-    {
-      id: 1,
-      name: "Arun Kumar",
-      seatNo: "A12",
-      destination: "Anna Nagar",
-      phone: "9876543210",
-    },
-    {
-      id: 2,
-      name: "Priya Sharma",
-      seatNo: "B07",
-      destination: "Tambaram",
-      phone: "9123456780",
-    },
-    {
-      id: 3,
-      name: "Rahul Singh",
-      seatNo: "C03",
-      destination: "Velachery",
-      phone: "9988776655",
-    },
-  ];
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/students")
+      .then((res) => res.json())
+      .then((data) => setStudents(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <section className="about-section">
       <div className="admin-container">
 
-        {/* Page Heading */}
+        {/* Heading */}
         <div className="hero-text-vertical show admin-heading">
           <h1>Admin Dashboard</h1>
           <p>College Bus Student Details</p>
@@ -50,7 +36,7 @@ const Admin = () => {
 
             <tbody>
               {students.map((student) => (
-                <tr key={student.id}>
+                <tr key={student._id}>
                   <td>{student.name}</td>
                   <td>{student.seatNo}</td>
                   <td>{student.destination}</td>
@@ -58,6 +44,7 @@ const Admin = () => {
                 </tr>
               ))}
             </tbody>
+
           </table>
         </div>
 
