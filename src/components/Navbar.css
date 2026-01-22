@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #2F4F4F;
+  background-color: #1c1e1e;
 
   position: fixed;
   top: 0;
@@ -99,7 +99,7 @@
     position: absolute;
     top: 60px;
     right: 12px;
-    background-color: #2F4F4F;
+    background-color: #1c1e1e;
     flex-direction: column;
     align-items: flex-start;
     width: 190px;

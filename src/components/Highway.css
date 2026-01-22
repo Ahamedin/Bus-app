@@ -17,17 +17,17 @@
 ================================ */
 
 .highway-section {
-  padding-top: 70px; /* Navbar height */
+  padding-top: 70px;
 }
 
 .story-section,
 .destination-section,
 .about-section {
-  padding-top: 0; /* Navbar height */
+  padding-top: 0;
 }
 
 /* ===============================
-   GLOBAL BACKGROUND
+   BLURRED IMAGE BACKGROUNDS
 ================================ */
 
 .highway-section,
@@ -36,12 +36,58 @@
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #005f56);
 }
 
+/* Blurred background layer */
+.highway-section::before,
+.story-section::before,
+.destination-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  transform: scale(1.1);
+  z-index: 0;
+}
+
+/* Page-specific background images */
+.highway-section::before {
+  background-image: url("../assets/img1.jpg");
+}
+
+.story-section::before {
+  background-image: url("../assets/img2.jpg");
+}
+
+.destination-section::before {
+  background-image: url("../assets/img3.jpg");
+}
+
+/* Dark overlay for readability */
+.highway-section::after,
+.story-section::after,
+.destination-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+/* Keep content above backgrounds */
+.highway-container,
+.story-section > div,
+.destination-section > div {
+  position: relative;
+  z-index: 2;
+}
+
+/* About page background stays simple */
 .about-section {
   min-height: 100vh;
-  background: linear-gradient(135deg, #005f56);
+  background: linear-gradient(135deg, #050505, #0f0f14, #090909);
   padding-bottom: 80px;
 }
 
@@ -50,7 +96,6 @@
 ================================ */
 
 .highway-container {
-  position: relative;
   height: 100%;
   display: flex;
   align-items: center;
@@ -134,10 +179,7 @@
   max-width: 750px;
 }
 
-/* ===============================
-   STORY + DESTINATION LEFT SHIFT
-================================ */
-
+/* Story & Destination slight left shift */
 .story-section .hero-text-vertical,
 .destination-section .hero-text-vertical {
   margin-left: 90px;
@@ -166,104 +208,58 @@
 }
 
 /* ===============================
-   ABOUT PAGE WRAPPER
+   ABOUT PAGE CENTER TEXT
 ================================ */
 
-.hero-text-vertical-wrapper {
-  margin-left: 120px;
+.about-section .hero-text-vertical-wrapper {
+  margin-left: 0;
   margin-top: 80px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.about-section .hero-text-vertical {
+  margin-left: 0 !important;
+  padding-right: 0;
+  max-width: 90%;
+}
+
+.about-section .hero-text-vertical h1,
+.about-section .hero-text-vertical p {
+  text-align: center;
 }
 
 /* ===============================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ================================ */
 
-/* Tablets */
 @media (max-width: 768px) {
-
-  .road-wrapper { 
-    width: 160px;
-    display: flex;
-    justify-content: flex-start;
-  }
-  .vertical-road { 
-    width: 90px;
-    height: 250%;
-  }
-
-  .hero-text-vertical {
-    margin-left: 80px;
-    padding-right: 20px;
-  }
-
-  .hero-text-vertical-wrapper {
-    margin-left: 80px;
-  }
-
-  .bus-topview {
-    left: 18px;
-    width: 150px;
-  }
+  .road-wrapper { width: 160px; }
+  .vertical-road { width: 90px; height: 250%; }
+  .hero-text-vertical { margin-left: 80px; }
+  .bus-topview { left: 18px; width: 150px; }
 }
-
-/* ===============================
-   MOBILE ALIGNMENT
-================================ */
 
 @media (max-width: 480px) {
 
-  .home-container {
-    position: relative;
-  }
+  .road-wrapper { width: 105px; }
+  .vertical-road { width: 80px; }
 
-  .highway-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    height: 100%;
-  }
-
-  /* Road fixed to left */
-  .road-wrapper {
-    width: 105px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0;
-    z-index: 5;
-  }
-
-  .vertical-road {
-    width: 80px;
-    height: 300%;
-    background: #2f2f2f;
-    position: relative;
-    animation: moveRoadVertical 6s linear infinite;
-  }
-
-  /* Text beside road */
   .hero-text-vertical {
     margin-left: 15px;
     margin-top: 30px;
     max-width: calc(100vw - 90px);
     text-align: left;
-    padding-right: 20px;
   }
 
   .hero-text-vertical h1 {
-    font-size: 1.8rem;
-    line-height: 1.2;
+    font-size: 1.6rem;   /* smaller heading */
+    line-height: 1.15;
+    word-break: break-word; /* prevents text cutting */
   }
 
-  .hero-text-vertical p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-
-  /* Keep story & destination left aligned */
   .story-section .hero-text-vertical,
   .destination-section .hero-text-vertical {
     margin-left: 15px;
@@ -271,36 +267,13 @@
 
   .bus-topview {
     left: -10px;
-    width: 130px;
+    width: 110px;
     top: 120px;
   }
-  /* Center text only in About page */
-.about-section .hero-text-vertical h1,
-.about-section .hero-text-vertical p {
-  
-  text-align: center;
 }
 
-  
-.about-section .hero-text-vertical-wrapper{
-  margin-left: 0;
-  margin-right: 0;
-  align-items: center;
-  padding: 0 20px;
-}
-.about-section .hero-text-vertical {
-  margin-left: 0 !important;     /* remove text block left margin */
-  padding-right: 0;
-  max-width: 90%;
-}
-
-}
-
-/* Ultra small phones */
 @media (max-width: 360px) {
   .vertical-road { width: 60px; }
   .hero-text-vertical h1 { font-size: 2rem; }
   .hero-text-vertical p { font-size: 0.95rem; }
 }
-
-

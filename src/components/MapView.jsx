@@ -8,10 +8,9 @@ import {
 
 const containerStyle = {
   width: "100%",
-  height: "100vh",
+  height: "80vh",   // ✅ Avoid 100vh overflow issue
 };
 
-/* 📍 Kalasalingam University Location */
 const DEFAULT_UNIVERSITY = {
   lat: 9.575163364325412,
   lng: 77.68070518973906,
@@ -41,15 +40,17 @@ const MapView = () => {
       });
 
       setDirections(result);
-    } catch {
-      setError("Route not found. Try a valid destination.");
+    } catch (err) {
+      setError("Route not found. Enter a valid location.");
     }
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDiueVafmMYqloszSSngL3KN2EnAbRckIM">
-      
-      {/* Top Control Panel */}
+    <LoadScript
+      googleMapsApiKey="AIzaSyDiueVafmMYqloszSSngL3KN2EnAbRckIM"
+      libraries={["places"]}   // ✅ REQUIRED
+    >
+      {/* Controls */}
       <div className="map-controls">
         <h2>Bus Route Tracking</h2>
 
@@ -84,7 +85,6 @@ const MapView = () => {
       >
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
-
     </LoadScript>
   );
 };
