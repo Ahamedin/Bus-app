@@ -10,28 +10,24 @@ const UserDetailsForm = () => {
   const [destination, setDestination] = useState("");
   const [phone, setPhone] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    await fetch("http://localhost:5000/api/users/save-details", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        clerkUserId: user.id,
-        name: `${user.firstName} ${user.lastName}`,
-        seatNo,
-        destination,
-        phone,
-      }),
-    });
+  await fetch("http://localhost:5000/api/users/save-details", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clerkUserId: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      seatNo,
+      destination,
+      phone,
+    }),
+  });
 
-    alert("Details saved successfully");
+  navigate("/");
+};
 
-    // ✅ IMPORTANT: redirect after first save
-    navigate("/");
-  };
 
   return (
     <form onSubmit={handleSubmit}>

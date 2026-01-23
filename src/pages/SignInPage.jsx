@@ -6,7 +6,7 @@ import UserDetailsForm from "../components/UserDetailsForm";
 const SignInPage = () => {
   return (
     <div className="auth-container">
- <SignIn afterSignInUrl="/details" /> 
+<SignIn redirectUrl="/auth-redirect" />
     </div>
   );
 };

@@ -4,21 +4,39 @@ import User from "../models/User.js";
 const router = express.Router();
 
 // Check if user already completed details
-router.get("/status/:clerkUserId", async (req, res) => {
-  const { clerkUserId } = req.params;
-
+router.get("/check/:clerkUserId", async (req, res) => {
   try {
-    const user = await User.findOne({ clerkUserId });
+    const user = await User.findOne({
+      clerkUserId: req.params.clerkUserId,
+    });
 
     if (user) {
-      return res.json({ completed: true });
+      return res.json({ exists: true });
     }
 
-    res.json({ completed: false });
-  } catch (error) {
-    res.status(500).json({ message: "Status check failed" });
+    res.json({ exists: false });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
   }
 });
+
+router.get("/profile/:clerkUserId", async (req, res) => {
+  try {
+    const user = await User.findOne({
+      clerkUserId: req.params.clerkUserId,
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 
 
 /* Save user details after Clerk login */

@@ -15,8 +15,8 @@ import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import UserDetailsPage from "./pages/UserDetailsPage";
-
+import UserDetailsPage from "./components/UserDetailsForm";
+import AuthRedirect from "./pages/AuthRedirect";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         {/* AUTH ROUTES */}
      <Route path="/sign-in" element={<SignInPage />} />
        <Route path="/details" element={<UserDetailsPage />} />
+       <Route path="/auth-redirect" element={<AuthRedirect />} />
 
 
 
