@@ -1,22 +1,27 @@
 .auth-container {
-  min-height: calc(100vh - 70px); /* subtract navbar height */
+  min-height: calc(100vh - 70px); /* navbar offset */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;         /* top-align instead of true center */
   background: linear-gradient(135deg, #050505, #0f0f14, #090909);
-  padding: 20px;
+  padding-top: 100px;               /* desktop spacing */
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 
-/* Ensure Clerk auth card scales properly */
+/* Clerk card */
 .auth-container .cl-rootBox {
   max-width: 420px;
   width: 100%;
 }
 
-/* Tablet */
+/* ===== Tablet ===== */
 @media (max-width: 768px) {
   .auth-container {
-    padding: 30px 20px;
+    padding-top: 50px;   /* slightly less gap */
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .auth-container .cl-rootBox {
@@ -24,13 +29,22 @@
   }
 }
 
-/* Mobile */
+/* ===== Mobile ===== */
 @media (max-width: 480px) {
   .auth-container {
-    padding: 20px 15px;
+    padding-top: 35px;   /* prevent too much downward shift */
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .auth-container .cl-rootBox {
     max-width: 100%;
+  }
+}
+
+/* ===== Very small phones ===== */
+@media (max-width: 360px) {
+  .auth-container {
+    padding-top: 25px;
   }
 }
