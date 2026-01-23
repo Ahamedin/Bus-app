@@ -1,0 +1,87 @@
+.details-section {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #111, #000);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
+  padding-bottom: 0;
+}
+
+/* Container now takes full width so we can push form right */
+.details-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
+/* Heading stays centered */
+.details-heading {
+  text-align: center;
+  
+}
+
+/* Form card */
+.details-form {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 35px 45px;
+  min-width: 340px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  /* 👇 Move slightly to right on large screens */
+  margin-left: auto;
+  margin-right: 420px;
+}
+
+/* Inputs */
+.details-form input {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-family: "CollegeParagraph", sans-serif;
+  font-size: 1.1rem;
+}
+
+.details-form button {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.details-form button:hover {
+  background: #e5e5e5;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .details-form {
+    margin-left: auto;
+    margin-right: 60px; /* smaller shift */
+  }
+}
+
+/* Mobiles */
+@media (max-width: 600px) {
+  .details-form {
+    min-width: auto;
+    width: 90%;
+    padding: 25px;
+
+    /* 👇 Center again on small screens */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

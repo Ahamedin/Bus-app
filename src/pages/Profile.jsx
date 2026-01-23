@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
+import "./Profile.css";   // 👈 import CSS
 
 const Profile = () => {
   const { user, isLoaded } = useUser();
@@ -12,17 +13,14 @@ const Profile = () => {
 
     fetch(`http://localhost:5000/api/users/profile/${user.id}`)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Profile not found");
-        }
+        if (!res.ok) throw new Error("Profile not found");
         return res.json();
       })
       .then((dbUser) => {
         setData(dbUser);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
         setError("Profile data not found");
         setLoading(false);
       });
@@ -33,13 +31,20 @@ const Profile = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div style={{ padding: "40px", color: "white" }}>
-      <h1>Student Profile</h1>
-      <p><b>Name:</b> {data.name}</p>
-      <p><b>Seat No:</b> {data.seatNo}</p>
-      <p><b>Destination:</b> {data.destination}</p>
-      <p><b>Phone:</b> {data.phone}</p>
-    </div>
+    <section className="profile-container">
+      
+      <div className="profile-heading hero-text-vertical show">
+        <h1>Student Profile</h1>
+      </div>
+
+      <div className="profile-card">
+        <p><span>Name:</span> {data.name}</p>
+        <p><span>Seat No:</span> {data.seatNo}</p>
+        <p><span>Destination:</span> {data.destination}</p>
+        <p><span>Phone:</span> {data.phone}</p>
+      </div>
+
+    </section>
   );
 };
 
