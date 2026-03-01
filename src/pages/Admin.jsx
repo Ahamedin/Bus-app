@@ -1,60 +1,94 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import "../components/Highway.css";
 import "./Admin.css";
 
 const Admin = () => {
   const { user, isLoaded } = useUser();
+  const { getToken } = useAuth();
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
 
-  // 🔐 Protect Admin Page
+  // 🔐 Protect Admin Page + Fetch Students
   useEffect(() => {
     if (!isLoaded) return;
 
+    // Redirect non-admin
     if (!user?.publicMetadata?.isAdmin) {
-      navigate("/"); // redirect normal users
+      navigate("/");
+      return;
     }
-  }, [isLoaded, user, navigate]);
 
-  // 📥 Fetch students (admin route)
-  useEffect(() => {
-    if (!isLoaded) return;
+    const fetchStudents = async () => {
+      try {
+        const token = await getToken();
 
-    fetch("http://localhost:5000/api/admin/students", {
-      headers: {
-        Authorization: `Bearer ${user?.id}`, // simple version (you can improve later)
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setStudents(data))
-      .catch((err) => console.error(err));
-  }, [isLoaded, user]);
+        const res = await fetch(
+          "http://localhost:5000/api/admin/students",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+        setStudents(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchStudents();
+  }, [isLoaded, user, navigate, getToken]);
 
   // ✏️ Update destination
   const updateDestination = async (id, destination) => {
-    await fetch(`http://localhost:5000/api/admin/update/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ destination }),
-    });
+    try {
+      const token = await getToken();
 
-    setStudents((prev) =>
-      prev.map((s) =>
-        s._id === id ? { ...s, destination } : s
-      )
-    );
+      await fetch(`http://localhost:5000/api/admin/update/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ destination }),
+      });
+
+      setStudents((prev) =>
+        prev.map((s) =>
+          s._id === id ? { ...s, destination } : s
+        )
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // ❌ Delete user
   const deleteUser = async (id) => {
-    await fetch(`http://localhost:5000/api/admin/delete/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      const token = await getToken();
 
-    setStudents((prev) => prev.filter((s) => s._id !== id));
+      await fetch(`http://localhost:5000/api/admin/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setStudents((prev) =>
+        prev.filter((s) => s._id !== id)
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
+
+
+
 
   if (!isLoaded) return <p>Loading...</p>;
 
@@ -119,5 +153,7 @@ const Admin = () => {
     </section>
   );
 };
+
+
 
 export default Admin;

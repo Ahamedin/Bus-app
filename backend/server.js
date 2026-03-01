@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/admin.js";
+
 
 dotenv.config();
 connectDB();
@@ -14,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/students", studentRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 
 const PORT = 5000;

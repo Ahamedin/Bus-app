@@ -1,5 +1,7 @@
 import express from "express";
 import User from "../models/User.js";
+import { requireAuth , requireAdmin } from "../middleware/auth.js"; // ✅ ADD THIS
+
 
 const router = express.Router();
 
@@ -67,6 +69,68 @@ router.post("/save-details", async (req, res) => {
     res.status(200).json({ message: "User details saved", user });
   } catch (error) {
     res.status(500).json({ message: "Failed to save user details" });
+  }
+});
+
+
+// Update user details
+router.put(
+  "/update/:id",
+  requireAuth,
+  requireAdmin,
+  async (req, res) => {
+    try {
+      const { destination } = req.body;
+
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        { destination },
+        { new: true }
+      );
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(500).json({ message: "Update failed" });
+    }
+  }
+);
+
+// Delete user
+router.delete("/delete/:clerkUserId", async (req, res) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({
+      clerkUserId: req.params.clerkUserId,
+    });
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete user" });
+  }
+});
+
+router.get("/profile/", requireAuth, async (req, res) => {
+  try {
+    const clerkUserId = req.auth.userId;
+
+    const user = await User.findOne({ clerkUserId });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching profile" });
   }
 });
 
