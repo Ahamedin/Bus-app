@@ -277,3 +277,54 @@
   .hero-text-vertical h1 { font-size: 2rem; }
   .hero-text-vertical p { font-size: 0.95rem; }
 }
+
+/* ===============================
+   ABOUT PAGE SPECIFIC  
+================================ */
+
+/* ===============================
+   FIXED BACKGROUND IMAGE
+================================ */
+
+.about-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  filter: blur(12px) brightness(0.4);
+  z-index: -2;
+}
+
+/* ===============================
+   OVERLAY (CONTENT LAYER)
+================================ */
+
+.about-overlay {
+  min-height: 100dvh;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  display: flex;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: improve text readability */
+.hero-text-vertical h1 {
+  color: #ffffff;
+}
+
+.hero-text-vertical p {
+  color: #d0d0d0;
+}

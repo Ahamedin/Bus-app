@@ -8,7 +8,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <h2 className="logo">Bus App</h2>
+      <Link to="/">
+        <h2 className="logo">Bus App</h2>
+      </Link>
 
       {/* Hamburger Icon (Mobile Only) */}
       <div className="menu-icon" onClick={() => setOpen(!open)}>

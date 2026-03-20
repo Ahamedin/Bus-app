@@ -21,7 +21,8 @@ const MapView = () => {
   const [destination, setDestination] = useState("");
   const [directions, setDirections] = useState(null);
   const [error, setError] = useState("");
-
+  const LIBRARIES = ["places"];
+  
   const calculateRoute = async () => {
     if (!destination) {
       setError("Please enter destination");
@@ -41,6 +42,7 @@ const MapView = () => {
 
       setDirections(result);
     } catch (err) {
+      // console.error("Google API Error:", err);
       setError("Route not found. Enter a valid location.");
     }
   };
@@ -48,7 +50,7 @@ const MapView = () => {
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyDiueVafmMYqloszSSngL3KN2EnAbRckIM"
-      libraries={["places"]}   // ✅ REQUIRED
+      libraries={LIBRARIES}   // ✅ REQUIRED
     >
       {/* Controls */}
       <div className="map-controls">
