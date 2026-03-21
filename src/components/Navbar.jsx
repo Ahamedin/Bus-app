@@ -24,6 +24,7 @@ const Navbar = () => {
 
         <SignedIn>
           <Link to="/profile" onClick={() => setOpen(false)}>Profile</Link>
+          <Link to="/trip" onClick={() => setOpen(false)}>🚌 Trip</Link>
           <UserButton afterSignOutUrl="/" />
         </SignedIn>
 

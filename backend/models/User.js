@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+const coordSchema = new mongoose.Schema(
+  { lat: Number, lng: Number },
+  { _id: false }
+);
+
 const userSchema = new mongoose.Schema(
   {
     clerkUserId: {
@@ -23,6 +28,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // ── Trip Tracking Fields ──────────────────
+    source: { type: String, default: "" },
+    sourceCoords: { type: coordSchema, default: null },
+    destCoords:   { type: coordSchema, default: null },
+    tripActive:   { type: Boolean, default: false },
+    etaMinutes:   { type: Number, default: null },
+    tripAlerted:  { type: Boolean, default: false },
   },
   { timestamps: true }
 );

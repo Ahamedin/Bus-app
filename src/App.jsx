@@ -17,6 +17,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import UserDetailsPage from "./components/UserDetailsForm";
 import AuthRedirect from "./pages/AuthRedirect";
+import TripTracker from "./pages/TripTracker";
 
 function App() {
   return (
@@ -45,6 +46,15 @@ function App() {
           element={
             <SignedIn>
               <Profile />
+            </SignedIn>
+          }
+        />
+
+        <Route
+          path="/trip"
+          element={
+            <SignedIn>
+              <TripTracker />
             </SignedIn>
           }
         />

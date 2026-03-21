@@ -121,16 +121,86 @@ router.delete("/delete/:clerkUserId", async (req, res) => {
 router.get("/profile/", requireAuth, async (req, res) => {
   try {
     const clerkUserId = req.auth.userId;
-
     const user = await User.findOne({ clerkUserId });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
+    if (!user) return res.status(404).json({ message: "User not found" });
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Error fetching profile" });
+  }
+});
+
+// ── PUT /api/users/set-trip/:clerkUserId ─────────────────
+// Saves source + destination + coords and activates trip
+// Body: { source, destination, sourceCoords:{lat,lng}, destCoords:{lat,lng} }
+router.put("/set-trip/:clerkUserId", async (req, res) => {
+  try {
+    const { source, destination, sourceCoords, destCoords } = req.body;
+
+    if (!destCoords?.lat || !destCoords?.lng)
+      return res.status(400).json({ message: "destCoords required" });
+
+    const clerkUserId = req.params.clerkUserId;
+    console.log(`🗺️  set-trip for clerkUserId: ${clerkUserId}`);
+
+    // findOneAndUpdate with upsert — creates record if user doesn't exist yet
+    const user = await User.findOneAndUpdate(
+      { clerkUserId },
+      {
+        $set: {
+          source,
+          destination,
+          sourceCoords,
+          destCoords,
+          tripActive:  true,
+          tripAlerted: false,
+          etaMinutes:  null,
+        },
+        // Only set these on first creation (if user doesn't exist)
+        $setOnInsert: {
+          clerkUserId,
+          name:   "Passenger",
+          seatNo: "N/A",
+          phone:  "N/A",
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+
+    console.log(`✅ Trip set for: ${user.name} → ${destination}`);
+    res.json({ message: "Trip started", user });
+  } catch (err) {
+    console.error("set-trip error:", err.message);
+    res.status(500).json({ message: "Failed to set trip: " + err.message });
+  }
+});
+
+// ── PUT /api/users/end-trip/:clerkUserId ─────────────────
+router.put("/end-trip/:clerkUserId", async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { clerkUserId: req.params.clerkUserId },
+      { tripActive: false, tripAlerted: false, etaMinutes: null },
+      { new: true }
+    );
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json({ message: "Trip ended", user });
+  } catch {
+    res.status(500).json({ message: "Failed to end trip" });
+  }
+});
+
+// ── GET /api/users/trip-status/:clerkUserId ──────────────
+// Frontend polls this to get ETA and alert state
+router.get("/trip-status/:clerkUserId", async (req, res) => {
+  try {
+    const user = await User.findOne(
+      { clerkUserId: req.params.clerkUserId },
+      "name seatNo source destination sourceCoords destCoords tripActive etaMinutes tripAlerted"
+    );
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json(user);
+  } catch {
+    res.status(500).json({ message: "Server error" });
   }
 });
 

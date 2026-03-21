@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap');
+
+/* ── Page Wrapper ─────────────────────────────── */
+.tt-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d0d1a 0%, #0f1b35 50%, #1a0d2e 100%);
+  padding: 90px 20px 60px;
+  font-family: 'Inter', sans-serif;
+  color: #e2e8f0;
+}
+
+.tt-loading {
+  text-align: center;
+  padding: 3rem;
+  color: #8ec6ff;
+  font-size: 1.2rem;
+}
+
+/* ── Header ───────────────────────────────────── */
+.tt-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tt-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem;
+}
+
+.tt-header p {
+  color: #94a3b8;
+  font-size: 1.05rem;
+}
+
+/* ── Card Base ────────────────────────────────── */
+.tt-card,
+.tt-how-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+
+.tt-card h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  color: #60a5fa;
+}
+
+/* ── Inputs ───────────────────────────────────── */
+.tt-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .tt-inputs { grid-template-columns: 1fr; }
+}
+
+.tt-input-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tt-input-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.tt-input-group input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+.tt-input-group input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tt-input-with-btn {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tt-icon-btn {
+  background: rgba(96, 165, 250, 0.15);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tt-icon-btn:hover:not(:disabled) {
+  background: rgba(96, 165, 250, 0.3);
+  transform: scale(1.05);
+}
+
+.tt-icon-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Buttons ──────────────────────────────────── */
+.tt-btn-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tt-btn {
+  padding: 0.75rem 1.6rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.tt-btn:hover { transform: translateY(-2px); }
+.tt-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.tt-btn-secondary {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+}
+.tt-btn-secondary:hover {
+  background: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.tt-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+}
+.tt-btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+}
+
+.tt-btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+}
+
+/* ── Status Messages ──────────────────────────── */
+.tt-error {
+  color: #f87171;
+  font-size: 0.88rem;
+  margin: 0.6rem 0 0;
+}
+
+.tt-status {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  color: #93c5fd;
+}
+
+.tt-status.tt-status-alert {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  animation: pulseBorder 1s infinite;
+}
+
+/* ── ETA Card ─────────────────────────────────── */
+.tt-eta-card {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  background: rgba(96, 165, 250, 0.08);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.tt-eta-card.tt-eta-alert {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.6);
+  animation: alertPulse 1s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes alertPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+  50%       { box-shadow: 0 0 50px rgba(239, 68, 68, 0.7); }
+}
+
+@keyframes pulseBorder {
+  0%, 100% { border-color: rgba(239, 68, 68, 0.4); }
+  50%       { border-color: rgba(239, 68, 68, 0.9); }
+}
+
+/* Normal ETA */
+.tt-eta-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+.tt-eta-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.tt-eta-unit {
+  font-size: 1rem;
+  color: #64748b;
+  margin-top: 0.3rem;
+}
+
+.tt-eta-safe {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #6ee7b7;
+}
+
+.tt-eta-soon {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #fbbf24;
+}
+
+/* Alert ETA */
+.tt-alert-content { color: #fca5a5; }
+.tt-alert-icon { font-size: 4rem; margin-bottom: 0.5rem; animation: shake 0.5s infinite; }
+.tt-alert-content h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f87171;
+  margin: 0 0 0.5rem;
+}
+.tt-alert-content p { color: #fca5a5; margin: 0.3rem 0; }
+.tt-seat { margin-top: 0.5rem; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-5px); }
+  75%       { transform: translateX(5px); }
+}
+
+/* ── Trip Info Chips ──────────────────────────── */
+.tt-trip-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tt-info-chip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.tt-info-arrow { color: #60a5fa; font-size: 1.3rem; font-weight: 700; }
+
+/* ── Map ──────────────────────────────────────── */
+.tt-map-container {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* ── How it works ─────────────────────────────── */
+.tt-how-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #a78bfa;
+  margin: 0 0 1rem;
+}
+
+.tt-how-card ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #94a3b8;
+  line-height: 2;
+  font-size: 0.95rem;
+}
+
+.tt-how-card li strong { color: #e2e8f0; }
