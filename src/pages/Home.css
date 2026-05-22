@@ -3,6 +3,29 @@
   width: 100%;
 }
 
+.map-loading {
+  padding: 1.5rem;
+  text-align: center;
+  color: #475569;
+  font-weight: 600;
+}
+
+.map-section {
+  min-height: 480px;
+}
+
+.map-placeholder {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  margin: 1rem 0 0;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.05), rgba(15, 23, 42, 0.08));
+  color: #64748b;
+  font-weight: 600;
+}
+
 /* ===== BUS CONTINUOUS ANIMATION ===== */
 
 .bus-continuous {
