@@ -73,7 +73,7 @@ const Footer = () => {
               <MemberCard
                 label="Backend"
                 name="Vikneshwaran"
-                profileHref="#"
+                profileHref="https://vikneshwaran.dev"
                 linkedinHref="https://www.linkedin.com/in/viknesh-waran/?skipRedirect=true"
               />
             </div>
