@@ -158,7 +158,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 ```env
 PORT=5000
-MONGO_URI=mongodb+srv://user:password@cluster0.mongodb.net/bus-app?retryWrites=true&w=majority
+MONGO_URI=mongodb+srv://user:password@cluster0.mongodb.net/bus-app?retryWrites=true&amp;w=majority
 JWT_SECRET=your_jwt_secret_here
 CLIENT_ORIGIN=http://localhost:3000
 NODE_ENV=development
