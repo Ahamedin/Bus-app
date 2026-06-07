@@ -1,6 +1,6 @@
 <div align="center">
 
-![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0F0C29,50:1A1A2E,100:F5A623&height=200&section=header&text=🚌%20BusApp&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Bus%20Seat%20Tracking%20%26%20Trip%20Management%20Platform&descAlignY=58&descSize=20&descColor=fde68a)
+![Header](https://capsule-render.vercel.app/api?type=waving&color=0:0F0C29,50:1A1A2E,100:F5A623&height=200&section=header&text=BusApp&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Bus%20Seat%20Tracking%20%26%20Trip%20Management%20Platform&descAlignY=58&descSize=20&descColor=fde68a)
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=3000&pause=800&color=F5A623&center=true&vCenter=true&width=700&lines=Real-time+Bus+Seat+Tracking;Trip+Creation+%26+Management;Google+Maps+Route+Visualization;JWT-based+Authentication;React+%2B+Express+%2B+MongoDB)](https://git.io/typing-svg)
 
